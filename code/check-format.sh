@@ -6,4 +6,10 @@ if [ -z ${1} ]; then
     exit 1
 fi
 
-find ${1} -iname '*.h' -o -iname '*.cpp' -o -iname '*.c' | xargs clang-format -style=file -fallback-style=none -i
+CONFIG_FILE=".clang_format"
+if [ ! -f ${CONFIG_FILE} ]; then
+    echo "No ${CONFIG_FILE} found. Using default one."
+    CONFIG_FILE="tools/code/clang_format"
+fi
+
+find ${1} -iname '*.h' -o -iname '*.cpp' -o -iname '*.c' | xargs clang-format -style=file -assume-filename=${CONFIG_FILE} -fallback-style=none -i
