@@ -45,14 +45,13 @@ if [ "${OS}" == "linux" ]; then
 else
     MAJOR_VERSION=`echo ${VERSION} | cut -d . -f 1`
     brew install llvm@${MAJOR_VERSION}
-
-    echo "/usr/local/opt/llvm/bin" >> ~/path_exports
 fi
 
+dirname clang-${VERSION} >> ~/path_exports
+
 if [ "${EXPORT}" == "true" ]; then
-    BASE_PATH=`which clang-${VERSION} | cut -d '-' -f 1`
-    echo "export CC=${BASE_PATH}-${VERSION}" >> ~/.bash_profile
-    echo "export CXX=${BASE_PATH}++" >> ~/.bash_profile
+    echo "export CC=clang-${VERSION}" >> ~/.bash_profile
+    echo "export CXX=clang++" >> ~/.bash_profile
 fi
 
 echo "Installing clang v${VERSION} OK."
