@@ -42,6 +42,8 @@ if [ "${OS}" == "linux" ]; then
 
     sudo apt-get update -qq
     sudo apt-get install clang-${VERSION} libstdc++-7-dev -y
+    sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-${VERSION} 100
+    sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-${VERSION} 100
 else
     MAJOR_VERSION=`echo ${VERSION} | cut -d . -f 1`
     brew install llvm@${MAJOR_VERSION}
