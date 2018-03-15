@@ -42,12 +42,16 @@ if [ "${OS}" == "linux" ]; then
 
     sudo apt-get update -qq
     sudo apt-get install clang-${VERSION} libstdc++-7-dev -y
+
+    BASE_PATH=`which clang-${VERSION} | cut -d '-' -f 1`
+    sudo update-alternatives --install /usr/bin/clang clang ${BASE_PATH}-${VERSION} 100
+    sudo update-alternatives --install /usr/bin/clang++ clang++ ${BASE_PATH}++ 100
 else
     MAJOR_VERSION=`echo ${VERSION} | cut -d . -f 1`
     brew install llvm@${MAJOR_VERSION}
-fi
 
-dirname clang-${VERSION} >> ~/path_exports
+    echo "/usr/local/opt/llvm/bin" >> ~/path_exports
+fi
 
 if [ "${EXPORT}" == "true" ]; then
     echo "export CC=clang-${VERSION}" >> ~/.bash_profile
