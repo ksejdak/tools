@@ -5,6 +5,8 @@ endfunction()
 macro(utils_getVersion VERSION)
     find_package(Git)
     execute_process(COMMAND ${GIT_EXECUTABLE} describe --abbrev=0 --tags OUTPUT_VARIABLE TAG_VERSION ERROR_VARIABLE TAG_VERSION)
+    string(STRIP ${TAG_VERSION} TAG_VERSION)
+    string(SUBSTRING ${TAG_VERSION} 1 -1 TAG_VERSION)
 
     if(${TAG_VERSION} MATCHES "^(fatal)")
         set(TAG_VERSION "0.1.0")
