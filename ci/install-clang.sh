@@ -45,7 +45,6 @@ if [ "${OS}" == "linux" ]; then
 
     BASE_PATH=`which clang-${VERSION} | cut -d '-' -f 1`
     sudo update-alternatives --install /usr/bin/clang clang ${BASE_PATH}-${VERSION} 100
-    sudo update-alternatives --install /usr/bin/clang++ clang++ ${BASE_PATH}++ 100
 else
     MAJOR_VERSION=`echo ${VERSION} | cut -d . -f 1`
     brew install llvm@${MAJOR_VERSION}
