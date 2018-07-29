@@ -43,6 +43,9 @@ if [ "${OS}" == "linux" ]; then
     sudo apt-get update -qq
     sudo apt-get install clang-${VERSION} libstdc++-7-dev -y
 
+    WHICH_CLANG=`which clang-${VERSION}`
+    DIRNAME_CLANG=`dirname ${WHICH_CLANG}`
+    echo "Exporting clang-${VERSION}: '${DIRNAME_CLANG}'"
     dirname `which clang-${VERSION}` >> ~/path_exports
 else
     MAJOR_VERSION=`echo ${VERSION} | cut -d . -f 1`
