@@ -27,26 +27,21 @@ fi
 echo "Installing clang v${VERSION}"
 
 if [ "${OS}" == "linux" ]; then
-    wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+    SHORT_VERSION=`echo ${VERSION} | cut -d . -f 1-2`
+    PACKAGE_NAME="clang+llvm-${VERSION}-x86_64-linux-gnu-ubuntu-14.04"
+    PACKAGE_BIN_NAME="${PACKAGE_NAME}.tar.xz"
+    PACKAGE_URL="http://releases.llvm.org/${VERSION}/${PACKAGE_BIN_NAME}"
 
-    case "${VERSION}" in
-    "3.9" | "4.0" | "5.0" | "6.0")
-        sudo apt-add-repository "deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-${VERSION} main" -y
-        sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-        ;;
-    *)
-        echo "Unsupported clang version."
+    wget --no-check-certificate --quiet ${PACKAGE_URL}
+    if [ ! -f ${PACKAGE_BIN_NAME} ]; then
+        echo "Failed to download clang v${VERSION}."
         exit 3
-        ;;
-    esac
+    fi
 
-    sudo apt-get update -qq
-    sudo apt-get install clang-${VERSION} libstdc++-7-dev -y
+    mkdir -p clang
+    tar --strip-components=1 -xf ${PACKAGE_BIN_NAME} -C clang
 
-    WHICH_CLANG=`which clang-${VERSION}`
-    DIRNAME_CLANG=`dirname ${WHICH_CLANG}`
-    echo "Exporting clang-${VERSION}: '${DIRNAME_CLANG}'"
-    dirname `which clang-${VERSION}` >> ~/path_exports
+    echo "${PWD}/clang/bin" >> ~/path_exports
 else
     MAJOR_VERSION=`echo ${VERSION} | cut -d . -f 1`
     brew install llvm@${MAJOR_VERSION}

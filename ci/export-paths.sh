@@ -11,7 +11,7 @@ fi
 
 EXPORTED_PATHS=""
 while IFS='' read -r LINE || [[ -n "$LINE" ]]; do
-    echo "Exporting '${LINE}'"
+    echo "Exporting path: '${LINE}'"
 
     if [ "${EXPORTED_PATHS}" == "" ]; then
         EXPORTED_PATHS=${LINE}
