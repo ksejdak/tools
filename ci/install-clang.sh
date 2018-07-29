@@ -40,6 +40,10 @@ if [ "${OS}" == "linux" ]; then
     mkdir -p clang
     tar --strip-components=1 -xf ${PACKAGE_BIN_NAME} -C clang
 
+    sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+    sudo apt-get update -qq
+    sudo apt-get install libstdc++-8-dev -y
+
     echo "${PWD}/clang/bin" >> ~/path_exports
 else
     MAJOR_VERSION=`echo ${VERSION} | cut -d . -f 1`
