@@ -14,14 +14,16 @@ if [ -z ${2} ]; then
     exit 2
 fi
 
-while IFS='' read -r LINE || [[ -n "$LINE" ]]; do
-    WARN=${LINE#"${PWD}/"}
-    RESULT=`grep "${WARN}" "${1}"`
-    if [ -z "${RESULT}" ]; then
-        echo "Doxygen warning: '${LINE}'"
-        exit 3
-    fi
+if [ -f ${2} ]; then
+    while IFS='' read -r LINE || [[ -n "$LINE" ]]; do
+        WARN=${LINE#"${PWD}/"}
+        RESULT=`grep "${WARN}" "${1}"`
+        if [ -z "${RESULT}" ]; then
+            echo "Doxygen warning: '${LINE}'"
+            exit 3
+        fi
 
-done < ${2}
+    done < ${2}
+fi
 
 echo "Doxygen check OK."
