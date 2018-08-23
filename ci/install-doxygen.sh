@@ -23,11 +23,10 @@ fi
 
 echo "Installing doxygen v${VERSION}."
 
-PACKAGE_NAME="doxygen-${VERSION}"
 if [ "${OS}" == "linux" ]; then
-    PACKAGE_BIN_NAME="${PACKAGE_NAME}.linux.bin.tar.gz"
+    PACKAGE_BIN_NAME="doxygen-${VERSION}.linux.bin.tar.gz"
 else
-    PACKAGE_BIN_NAME="${PACKAGE_NAME}.dmg"
+    PACKAGE_BIN_NAME="Doxygen-${VERSION}.dmg"
 fi
 PACKAGE_URL="ftp://ftp.stack.nl/pub/users/dimitri/${PACKAGE_BIN_NAME}"
 
@@ -40,6 +39,8 @@ fi
 mkdir -p doxygen
 
 if [ "${OS}" == "linux" ]; then
+    sudo apt-get install libclang-dev -y
+
     tar --strip-components=1 -xf ${PACKAGE_BIN_NAME} -C doxygen
     echo "${PWD}/doxygen/bin" >> ~/path_exports
 else
