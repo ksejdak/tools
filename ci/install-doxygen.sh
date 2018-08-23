@@ -39,11 +39,13 @@ fi
 mkdir -p doxygen
 
 if [ "${OS}" == "linux" ]; then
-    sudo apt-get install libclang-dev -y
+    sudo apt-get install libclang-6.0-dev -y graphviz
 
     tar --strip-components=1 -xf ${PACKAGE_BIN_NAME} -C doxygen
     echo "${PWD}/doxygen/bin" >> ~/path_exports
 else
+    brew install graphviz
+
     hdiutil attach ${PACKAGE_BIN_NAME}
     cp -R /Volumes/Doxygen/* doxygen/
     hdiutil unmount /Volumes/Doxygen
