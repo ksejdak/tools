@@ -42,8 +42,8 @@ if [ "${OS}" == "linux" ]; then
     wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
     sudo apt-add-repository "deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-6.0 main"
     sudo apt-get update
-    sudo apt-get install libclang1-6.0 graphviz -y
-    sudo ln -s /usr/lib/x86_64-linux-gnu/libclang-6.0.so.1 /usr/lib/x86_64-linux-gnu/libclang.so.6
+    sudo apt-get install libclang1-6.0 libclang-6.0-dev graphviz -y
+    #sudo ln -s /usr/lib/x86_64-linux-gnu/libclang-6.0.so.1 /usr/lib/x86_64-linux-gnu/libclang.so.6
 
     echo "======================"
     ls /usr/lib/x86_64-linux-gnu/ -al
