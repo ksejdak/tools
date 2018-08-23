@@ -39,7 +39,7 @@ fi
 mkdir -p doxygen
 
 if [ "${OS}" == "linux" ]; then
-    sudo apt-get install libclang-6.0-dev -y graphviz
+    sudo apt-get install libclang1-6.0 graphviz -y
 
     tar --strip-components=1 -xf ${PACKAGE_BIN_NAME} -C doxygen
     echo "${PWD}/doxygen/bin" >> ~/path_exports
