@@ -39,6 +39,9 @@ fi
 mkdir -p doxygen
 
 if [ "${OS}" == "linux" ]; then
+    echo "======================"
+    ls /usr/lib/x86_64-linux-gnu/ -al
+    echo "======================"
     sudo apt-get install libclang1-6.0 graphviz -y
 
     tar --strip-components=1 -xf ${PACKAGE_BIN_NAME} -C doxygen
