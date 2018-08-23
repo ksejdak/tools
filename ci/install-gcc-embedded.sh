@@ -32,7 +32,7 @@ if [ -d gcc ]; then
     exit 0
 fi
 
-echo "Installing arm-none-eabi-gcc v${VERSION}"
+echo "Installing arm-none-eabi-gcc v${VERSION}."
 
 case "${VERSION}" in
     "7")

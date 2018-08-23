@@ -24,7 +24,7 @@ if [ -z ${EXPORT} ]; then
     EXPORT=true
 fi
 
-echo "Installing clang v${VERSION}"
+echo "Installing clang v${VERSION}."
 
 if [ "${OS}" == "linux" ]; then
     PACKAGE_NAME="clang+llvm-${VERSION}-x86_64-linux-gnu-ubuntu-14.04"

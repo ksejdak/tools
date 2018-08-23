@@ -28,7 +28,7 @@ if [ -z ${EXPORT} ]; then
     EXPORT=true
 fi
 
-echo "Installing gcc v${VERSION}"
+echo "Installing gcc v${VERSION}."
 
 if [ "${OS}" == "linux" ]; then
     sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
