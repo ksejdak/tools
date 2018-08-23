@@ -39,10 +39,14 @@ fi
 mkdir -p doxygen
 
 if [ "${OS}" == "linux" ]; then
+    wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+    sudo apt-add-repository "deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-6.0 main"
+    sudo apt-get update
+    sudo apt-get install libclang1-6.0 graphviz -y
+
     echo "======================"
     ls /usr/lib/x86_64-linux-gnu/ -al
     echo "======================"
-    sudo apt-get install libclang1-6.0 graphviz -y
 
     tar --strip-components=1 -xf ${PACKAGE_BIN_NAME} -C doxygen
     echo "${PWD}/doxygen/bin" >> ~/path_exports
