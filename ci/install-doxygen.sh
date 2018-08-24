@@ -1,63 +1,20 @@
 #!/bin/bash
-# $1 - doxygen version to be installed (e.g. 3.8.2)
-# $2 - Host OS (Linux or macOS)
+# $1 - Host OS (Linux or macOS)
 
 set -ev
 
-VERSION=${1}
-OS=${2}
-
-if [ -z ${VERSION} ]; then
-    echo "No doxygen version specified. Aborting."
-    exit 1
-fi
+OS=${1}
 
 if [ -z ${OS} ]; then
     echo "No host OS specified. Aborting."
-    exit 2
+    exit 1
 fi
 
-if [ -d doxygen ]; then
-    exit 0
-fi
-
-echo "Installing doxygen v${VERSION}."
+echo "Installing doxygen."
 
 if [ "${OS}" == "linux" ]; then
-    PACKAGE_BIN_NAME="doxygen-${VERSION}.linux.bin.tar.gz"
+    sudo apt-get install doxygen -y
 else
-    PACKAGE_BIN_NAME="Doxygen-${VERSION}.dmg"
+    brew install doxygen
 fi
-PACKAGE_URL="ftp://ftp.stack.nl/pub/users/dimitri/${PACKAGE_BIN_NAME}"
-
-wget --no-check-certificate --quiet ${PACKAGE_URL}
-if [ ! -f ${PACKAGE_BIN_NAME} ]; then
-    echo "Failed to download doxygen v${VERSION}."
-    exit 3
-fi
-
-mkdir -p doxygen
-
-if [ "${OS}" == "linux" ]; then
-    wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
-    sudo apt-add-repository "deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-6.0 main"
-    sudo apt-get update
-    sudo apt-get install libclang1-6.0 libclang-6.0-dev graphviz -y
-    #sudo ln -s /usr/lib/x86_64-linux-gnu/libclang-6.0.so.1 /usr/lib/x86_64-linux-gnu/libclang.so.6
-
-    echo "======================"
-    ls /usr/lib/x86_64-linux-gnu/ -al
-    echo "======================"
-
-    tar --strip-components=1 -xf ${PACKAGE_BIN_NAME} -C doxygen
-    echo "${PWD}/doxygen/bin" >> ~/path_exports
-else
-    brew install graphviz
-
-    hdiutil attach ${PACKAGE_BIN_NAME}
-    cp -R /Volumes/Doxygen/* doxygen/
-    hdiutil unmount /Volumes/Doxygen
-    echo "${PWD}/doxygen/Doxygen.app/Contents/Resources" >> ~/path_exports
-fi
-
-echo "Installing doxygen v${VERSION} OK."
+echo "Installing doxygen OK."
