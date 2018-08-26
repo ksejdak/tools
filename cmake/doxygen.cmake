@@ -18,7 +18,12 @@ function(doxygen_addTarget INPUT)
     set(DOXYGEN_EXCLUDE bin/ build/ doc/ lib/ test/ tools/)
     set(DOXYGEN_WARN_LOGFILE ${DOXYGEN_OUTPUT_DIRECTORY}/doxygen.warn)
 
+    # Add target to generate doxygen docs in the build directory.
     doxygen_add_docs(doxygen ${INPUT} WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
-    add_custom_command(TARGET doxygen POST_BUILD COMMAND rm -rf ${PROJECT_SOURCE_DIR}/docs/*)
-    add_custom_command(TARGET doxygen POST_BUILD COMMAND cp -R ${PROJECT_SOURCE_DIR}/build/docs/* ${PROJECT_SOURCE_DIR}/docs/)
+
+    # Add target to copy generated doxygen docs to the docs directory.
+    add_custom_target(docs
+        COMMAND rm -rf ${PROJECT_SOURCE_DIR}/docs/*
+        COMMAND cp -R ${PROJECT_SOURCE_DIR}/build/docs/* ${PROJECT_SOURCE_DIR}/docs/
+    )
 endfunction()
