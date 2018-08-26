@@ -13,8 +13,8 @@ fi
 echo "Installing doxygen."
 
 if [ "${OS}" == "linux" ]; then
-    sudo apt-get install doxygen -y
+    sudo apt-get install doxygen graphviz -y
 else
-    brew install doxygen
+    brew install doxygen graphviz
 fi
 echo "Installing doxygen OK."
