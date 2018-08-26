@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -ev
-
 EXPORTS_FILE="${HOME}/path_exports"
 
 if [ ! -f ${EXPORTS_FILE} ]; then

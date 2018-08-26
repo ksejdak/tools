@@ -1,8 +1,6 @@
 #!/bin/bash
 # $1 - path to look for source files
 
-set -ev
-
 if [ -z ${1} ]; then
     echo "No source path specified. Aborting."
     exit 1

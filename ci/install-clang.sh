@@ -3,8 +3,6 @@
 # $2 - Host OS (Linux or macOS)
 # $3 - Export CC flag (true/false)
 
-set -ev
-
 VERSION=${1}
 OS=${2}
 EXPORT=${3}
