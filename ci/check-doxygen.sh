@@ -2,6 +2,8 @@
 # $1 - path to reference doxygen.warn file
 # $2 - path to generated doxygen.warn file during build
 
+set -e
+
 if [ -z ${1} ]; then
     echo "No reference doxygen.warn file specified. Aborting."
     exit 1

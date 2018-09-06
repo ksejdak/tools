@@ -1,6 +1,8 @@
 #!/bin/bash
 # $1 - Host OS (Linux or macOS)
 
+set -e
+
 OS=${1}
 
 if [ -z ${OS} ]; then

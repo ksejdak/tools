@@ -3,6 +3,8 @@
 # $2 - Host OS (Linux or macOS)
 # $3 - Export CC flag (true/false)
 
+set -e
+
 VERSION=${1}
 if [ "${2}" == "linux" ]; then
     OS="linux"
