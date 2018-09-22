@@ -10,7 +10,7 @@ fi
 
 tools/code/check-format.sh ${1}
 if [ ${?} -ne 0 ]; then
-    echo "Failed to run check_format.sh script."
+    echo "Failed to run check-format.sh script."
     exit 2
 fi
 
