@@ -26,4 +26,5 @@ if [ -f ${2} ]; then
     done < ${2}
 fi
 
+export TEST_KUBA="abrakadabra"
 echo "Doxygen check OK."
