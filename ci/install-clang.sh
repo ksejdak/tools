@@ -49,7 +49,7 @@ else
     MAJOR_VERSION=`echo ${VERSION} | cut -d . -f 1`
     brew install llvm@${MAJOR_VERSION}
 
-    echo "/usr/local/opt/llvm/bin" >> ~/path_exports
+    echo "/usr/local/opt/llvm@${MAJOR_VERSION}/bin" >> ~/path_exports
 fi
 
 SHORT_VERSION=`echo ${VERSION} | cut -d . -f 1-2`
