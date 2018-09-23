@@ -26,6 +26,8 @@ fi
 
 echo "Installing clang v${VERSION}."
 
+MAJOR_VERSION=`echo ${VERSION} | cut -d . -f 1`
+
 if [ "${OS}" == "linux" ]; then
     PACKAGE_NAME="clang+llvm-${VERSION}-x86_64-linux-gnu-ubuntu-14.04"
     PACKAGE_BIN_NAME="${PACKAGE_NAME}.tar.xz"
@@ -46,15 +48,19 @@ if [ "${OS}" == "linux" ]; then
 
     echo "${PWD}/clang/bin" >> ~/path_exports
 else
-    MAJOR_VERSION=`echo ${VERSION} | cut -d . -f 1`
     brew install llvm@${MAJOR_VERSION}
 
     echo "/usr/local/opt/llvm@${MAJOR_VERSION}/bin" >> ~/path_exports
 fi
 
-SHORT_VERSION=`echo ${VERSION} | cut -d . -f 1-2`
+if [ ${MAJOR_VERSION} \> 6 ]; then
+    BIN_VERSION=${MAJOR_VERSION}
+else
+    BIN_VERSION=`echo ${VERSION} | cut -d . -f 1-2`
+fi
+
 if [ "${EXPORT}" == "true" ]; then
-    echo "export CC=clang-${SHORT_VERSION}" >> ~/.bash_profile
+    echo "export CC=clang-${BIN_VERSION}" >> ~/.bash_profile
     echo "export CXX=clang++" >> ~/.bash_profile
 fi
 
