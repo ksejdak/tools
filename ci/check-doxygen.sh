@@ -14,7 +14,6 @@ if [ -z ${2} ]; then
     exit 2
 fi
 
-exit 5
 
 if [ -f ${2} ]; then
     while IFS='' read -r LINE || [[ -n "$LINE" ]]; do
