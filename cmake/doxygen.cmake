@@ -25,5 +25,6 @@ function(doxygen_addTarget INPUT)
     add_custom_target(docs
         COMMAND rm -rf ${PROJECT_SOURCE_DIR}/docs/*
         COMMAND cp -R ${PROJECT_SOURCE_DIR}/build/docs/* ${PROJECT_SOURCE_DIR}/docs/
+        COMMAND rm ${PROJECT_SOURCE_DIR}/docs/doxygen.warn
     )
 endfunction()
