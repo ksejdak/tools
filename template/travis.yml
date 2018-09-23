@@ -1,0 +1,77 @@
+language: cpp
+sudo: required
+group: travis_latest
+
+git:
+  depth: false
+
+env:
+  global:
+    - CMAKE_VER=3.12.2
+    - CODECOV=false
+
+matrix:
+  include:
+    - os: linux
+      env: _CC=gcc CC_VER=7
+    - os: linux
+      env: _CC=gcc CC_VER=8
+    - os: linux
+      env: _CC=clang CC_VER=6.0.1
+    - os: linux
+      env: _CC=clang CC_VER=7.0.0
+    - os: osx
+      osx_image: xcode10
+      env: _CC=gcc CC_VER=7
+    - os: osx
+      osx_image: xcode10
+      env: _CC=gcc CC_VER=8
+    - os: osx
+      osx_image: xcode10
+      env: _CC=clang CC_VER=6.0.1
+    - os: osx
+      osx_image: xcode10
+      env: _CC=clang CC_VER=7.0.0 CODECOV=true
+
+before_install:
+  - export PATH=${TRAVIS_BUILD_DIR}/tools/ci:${PATH}
+  - mkdir -p deps && cd $_
+
+install:
+  - install-${_CC}.sh ${CC_VER} ${TRAVIS_OS_NAME}
+  - install-cmake.sh ${CMAKE_VER} ${TRAVIS_OS_NAME}
+  - if [[ ${_CC} == "gcc" ]]; then install-clang.sh 6.0.1 ${TRAVIS_OS_NAME} false; fi
+  - install-cppcheck.sh ${TRAVIS_OS_NAME}
+  - install-doxygen.sh ${TRAVIS_OS_NAME}
+  - if [[ ${CODECOV} == true ]]; then install-lcov.sh ${TRAVIS_OS_NAME}; fi
+
+before_script:
+  - export-paths.sh
+  - source ${HOME}/.bash_profile
+
+  - cmake --version
+  - clang-format --version
+  - cppcheck --version
+  - doxygen --version
+
+  - cd ${TRAVIS_BUILD_DIR}
+  - mkdir build && cd $_
+
+script:
+  - cmake -DLIBALLOCATOR_TESTS=ON -DLIBALLOCATOR_DOCS=ON -DLIBALLOCATOR_COVERAGE=${CODECOV} ..
+  - make
+  - make doxygen
+
+  - ctest -R UnitTests
+
+  - |
+    if [[ ${CODECOV} == true ]]; then
+      make coverage
+      bash <(curl -s https://codecov.io/bash)
+    fi
+
+  - cd -
+
+  - check-format.sh .
+  - check-cppcheck.sh include/ src/ .config/cppcheck.warn
+  - check-doxygen.sh build/docs/doxygen.warn .config/doxygen.warn
