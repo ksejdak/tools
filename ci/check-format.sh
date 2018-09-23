@@ -1,14 +1,14 @@
 #!/bin/bash
 # $1 - path to look for source files
 
-set -e
+SRC_PATH=${1}
 
-if [ -z ${1} ]; then
+if [ -z ${SRC_PATH} ]; then
     echo "No source path specified. Aborting."
     exit 1
 fi
 
-tools/code/check-format.sh ${1}
+tools/code/check-format.sh ${SRC_PATH}
 if [ ${?} -ne 0 ]; then
     echo "Failed to run check-format.sh script."
     exit 2

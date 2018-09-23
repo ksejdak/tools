@@ -3,7 +3,9 @@
 
 set -e
 
-if [ -z ${1} ]; then
+SRC_PATH=${1}
+
+if [ -z ${SRC_PATH} ]; then
     echo "No source path specified. Aborting."
     exit 1
 fi
@@ -14,4 +16,4 @@ if [ ! -f ${CONFIG_FILE} ]; then
     CONFIG_FILE="tools/code/clang_format"
 fi
 
-find ${1} -iname '*.h' -o -iname '*.cpp' -o -iname '*.c' | xargs clang-format -style=file -assume-filename=${CONFIG_FILE} -fallback-style=none -i
+find ${SRC_PATH} -iname '*.h' -o -iname '*.cpp' -o -iname '*.c' | xargs clang-format -style=file -assume-filename=${CONFIG_FILE} -fallback-style=none -i
