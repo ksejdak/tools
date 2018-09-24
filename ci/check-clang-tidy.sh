@@ -10,8 +10,10 @@ fi
 
 cd ${BUILD_PATH}
 
-../tools/code/check-clang-tidy.sh
-CLANG_CHECK_ERR=${?}
+echo "========="
+echo $PWD
+tools/code/check-clang-tidy.sh
+CLANG_CHECK_ERR=$?
 
 cd -
 

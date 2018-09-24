@@ -7,4 +7,5 @@ if [ ! -f "compile_commands.json" ]; then
     exit 1
 fi
 
+echo "++++++++++++++"
 python ../tools/code/run-clang-tidy.py -checks=*
