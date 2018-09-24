@@ -10,9 +10,7 @@ fi
 
 cd ${BUILD_PATH}
 
-echo "========="
-echo $PWD
-tools/code/check-clang-tidy.sh
+../tools/code/check-clang-tidy.sh
 CLANG_CHECK_ERR=$?
 
 cd -
@@ -22,4 +20,4 @@ if [ ${CLANG_CHECK_ERR} -ne 0 ]; then
     exit 2
 fi
 
-echo "clang-tidy check OK."
+echo "Clang-tidy check OK."

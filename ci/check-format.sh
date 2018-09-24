@@ -21,4 +21,4 @@ if [ ${?} -ne 0 ]; then
     exit 3
 fi
 
-echo "Format check OK."
+echo "Clang-format check OK."
