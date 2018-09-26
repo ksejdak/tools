@@ -8,9 +8,9 @@ if [ -z ${SRC_PATH} ]; then
     exit 1
 fi
 
-tools/code/check-format.sh ${SRC_PATH}
+tools/code/check-clang-format.sh ${SRC_PATH}
 if [ ${?} -ne 0 ]; then
-    echo "Failed to run check-format.sh script."
+    echo "Failed to run check-clang-format.sh script."
     exit 2
 fi
 
