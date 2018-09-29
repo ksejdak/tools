@@ -8,6 +8,8 @@ git:
 env:
   global:
     - CMAKE_VER=3.12.2
+    - TESTS=true
+    - CLANG_CHECKS=false
     - CODECOV=false
 
 matrix:
@@ -31,7 +33,7 @@ matrix:
       env: _CC=clang CC_VER=6.0.1
     - os: osx
       osx_image: xcode10
-      env: _CC=clang CC_VER=7.0.0 CODECOV=true
+      env: _CC=clang CC_VER=7.0.0 CLANG_CHECKS=true CODECOV=true
 
 before_install:
   - export PATH=${TRAVIS_BUILD_DIR}/tools/ci:${PATH}
@@ -40,7 +42,7 @@ before_install:
 install:
   - install-${_CC}.sh ${CC_VER} ${TRAVIS_OS_NAME}
   - install-cmake.sh ${CMAKE_VER} ${TRAVIS_OS_NAME}
-  - if [[ ${_CC} == "gcc" ]]; then install-clang.sh 6.0.1 ${TRAVIS_OS_NAME} false; fi
+  - if [[ ${CLANG_CHECKS} == true ]]; then pip install pyyaml; fi
   - install-cppcheck.sh ${TRAVIS_OS_NAME}
   - install-doxygen.sh ${TRAVIS_OS_NAME}
   - if [[ ${CODECOV} == true ]]; then install-lcov.sh ${TRAVIS_OS_NAME}; fi
@@ -50,7 +52,8 @@ before_script:
   - source ${HOME}/.bash_profile
 
   - cmake --version
-  - clang-format --version
+  - if [[ ${CLANG_CHECKS} == true ]]; then clang-format --version; fi
+  - python --version
   - cppcheck --version
   - doxygen --version
 
@@ -58,11 +61,15 @@ before_script:
   - mkdir build && cd $_
 
 script:
-  - cmake -DLIBALLOCATOR_TESTS=ON -DLIBALLOCATOR_DOCS=ON -DLIBALLOCATOR_COVERAGE=${CODECOV} ..
+  - cmake -DLIBALLOCATOR_TESTS=${TESTS} -DLIBALLOCATOR_DOCS=ON -DLIBALLOCATOR_COVERAGE=${CODECOV} -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
   - make
   - make doxygen
 
-  - ctest -R UnitTests
+  - |
+    if [[ ${TESTS} == true ]]; then
+      ctest -R UnitTests
+      ctest -R PerformanceTests
+    fi
 
   - |
     if [[ ${CODECOV} == true ]]; then
@@ -72,6 +79,10 @@ script:
 
   - cd -
 
-  - check-format.sh .
+  - |
+    if [[ ${CLANG_CHECKS} == true ]]; then
+      check-clang-format.sh .
+      check-clang-tidy.sh build/
+    fi
   - check-cppcheck.sh include/ src/ .config/cppcheck.warn
   - check-doxygen.sh build/docs/doxygen.warn .config/doxygen.warn

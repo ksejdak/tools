@@ -1,0 +1,12 @@
+# Object and executable files.
+build/
+bin/
+
+# Project files.
+CMakeLists.txt.user
+.vscode/
+.idea/
+version.h
+
+# macOS files.
+.DS_Store
