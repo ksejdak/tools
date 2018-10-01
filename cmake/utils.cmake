@@ -16,7 +16,7 @@ macro(utils_getVersion VERSION)
     string(STRIP ${TAG_VERSION} TAG_VERSION)
     string(SUBSTRING ${TAG_VERSION} 1 -1 TAG_VERSION)
 
-    if(TAG_VERSION MATCHES "^(fatal)")
+    if(TAG_VERSION MATCHES "No names found")
         set(TAG_VERSION "0.1.0")
     endif()
 
