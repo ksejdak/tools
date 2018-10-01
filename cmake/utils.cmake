@@ -51,6 +51,18 @@ function(utils_showTargetConfig TARGET)
     get_target_property(LIBRARY_OUTPUT ${TARGET} LIBRARY_OUTPUT_DIRECTORY)
     get_target_property(RUNTIME_OUTPUT ${TARGET} RUNTIME_OUTPUT_DIRECTORY)
 
+    if(NOT C_STANDARD)
+        set(C_STANDARD "")
+    endif()
+
+    if(NOT CXX_STANDARD)
+        set(CXX_STANDARD "")
+    endif()
+
+    if(NOT COMPILATION_FLAGS)
+        set(COMPILATION_FLAGS "")
+    endif()
+
     string(REGEX REPLACE ";" " " COMPILATION_FLAGS "${COMPILATION_FLAGS}")
     string(TOUPPER ${TARGET} TARGET)
 
