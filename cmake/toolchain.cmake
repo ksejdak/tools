@@ -1,11 +1,21 @@
 include(tools/cmake/utils.cmake)
 
+macro(toolchain_addCompilationFlags)
+    set(FLAGS "${ARGN}")
+
+    foreach(FLAG IN LISTS FLAGS)
+        string(APPEND CMAKE_C_FLAGS " ${FLAG}")
+        string(APPEND CMAKE_CXX_FLAGS " ${FLAG}")
+    endforeach()
+endmacro()
+
 macro(toolchain_disableDebugOptimization)
-    set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0")
+    string(APPEND CMAKE_C_FLAGS_DEBUG " -O0")
+    string(APPEND CMAKE_CXX_FLAGS_DEBUG " -O0")
 endmacro()
 
 macro(toolchain_setLinkerScript SCRIPT_PATH)
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -T ${SCRIPT_PATH}")
+    string(APPEND CMAKE_EXE_LINKER_FLAGS " -T ${SCRIPT_PATH}")
 endmacro()
 
 function(toolchain_showConfig)
