@@ -1,0 +1,12 @@
+#!/bin/bash
+# $1 - binary path
+
+BINARY_PATH=${1}
+
+if [ -z ${BINARY_PATH} ]; then
+	echo "No executable provided. Abort."
+	exit 1
+fi
+
+cgdb -d arm-none-eabi-gdb -- ${BINARY_PATH} -x tools/scripts/openocd.gdbinit
+#arm-none-eabi-gdb --tui ${BINARY_PATH} -x tools/scripts/openocd.gdbinit
