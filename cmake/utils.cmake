@@ -12,7 +12,12 @@ macro(utils_getVersion VERSION)
         utils_error("Git not found")
     endif()
 
-    execute_process(COMMAND ${GIT_EXECUTABLE} describe --abbrev=0 --tags OUTPUT_VARIABLE TAG_VERSION ERROR_VARIABLE TAG_VERSION)
+    execute_process(
+        COMMAND ${GIT_EXECUTABLE} describe --abbrev=0 --tags
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+        OUTPUT_VARIABLE TAG_VERSION
+        ERROR_VARIABLE TAG_VERSION
+    )
     string(STRIP ${TAG_VERSION} TAG_VERSION)
     string(SUBSTRING ${TAG_VERSION} 1 -1 TAG_VERSION)
 
