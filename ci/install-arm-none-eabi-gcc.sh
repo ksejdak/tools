@@ -44,6 +44,15 @@ case "${VERSION}" in
             PACKAGE_URL="https://bit.ly/2R687uJ"
         fi
         ;;
+    "8")
+        PACKAGE_NAME="gcc-arm-none-eabi-8-2018-q4-major"
+        PACKAGE_BIN_NAME="${PACKAGE_NAME}-${OS}.tar.bz2"
+        if [ "${OS}" == "linux" ]; then
+            PACKAGE_URL="https://bit.ly/2TkzX6W"
+        else
+            PACKAGE_URL="https://bit.ly/2LFuzIK"
+        fi
+        ;;
     *)
         echo "Unsupported arm-none-eabi-gcc version."
         exit 3

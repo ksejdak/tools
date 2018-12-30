@@ -13,6 +13,7 @@ fi
 echo "Installing cppcheck."
 
 if [ "${OS}" == "linux" ]; then
+    sudo apt-get update
     sudo apt-get install cppcheck -y
 else
     brew install cppcheck
