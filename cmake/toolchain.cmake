@@ -1,21 +1,21 @@
 include(tools/cmake/utils.cmake)
 
-macro(toolchain_addCompilationFlags)
+macro(toolchain_addCompilationFlagsDebug)
     set(FLAGS "${ARGN}")
 
     foreach(FLAG IN LISTS FLAGS)
-        string(APPEND CMAKE_C_FLAGS " ${FLAG}")
-        string(APPEND CMAKE_CXX_FLAGS " ${FLAG}")
+        string(APPEND CMAKE_C_FLAGS_DEBUG " ${FLAG}")
+        string(APPEND CMAKE_CXX_FLAGS_DEBUG " ${FLAG}")
     endforeach()
 endmacro()
 
-macro(toolchain_disableDebugOptimization)
-    string(APPEND CMAKE_C_FLAGS_DEBUG " -O0")
-    string(APPEND CMAKE_CXX_FLAGS_DEBUG " -O0")
-endmacro()
+macro(toolchain_addCompilationFlagsRelease)
+    set(FLAGS "${ARGN}")
 
-macro(toolchain_setLinkerScript SCRIPT_PATH)
-    string(APPEND CMAKE_EXE_LINKER_FLAGS " -T ${SCRIPT_PATH}")
+    foreach(FLAG IN LISTS FLAGS)
+        string(APPEND CMAKE_C_FLAGS_RELEASE " ${FLAG}")
+        string(APPEND CMAKE_CXX_FLAGS_RELEASE " ${FLAG}")
+    endforeach()
 endmacro()
 
 function(toolchain_showConfig)
