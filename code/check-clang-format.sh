@@ -16,4 +16,4 @@ if [ ! -f ${CONFIG_FILE} ]; then
     CONFIG_FILE="tools/code/clang_format"
 fi
 
-find ${SRC_PATH} -iname '*.h' -o -iname '*.cpp' -o -iname '*.c' | xargs clang-format -style=file -assume-filename=${CONFIG_FILE} -fallback-style=none -i
+find ${SRC_PATH} -iname '*.h' -o -iname '*.hpp' -o -iname '*.cpp' -o -iname '*.c' | xargs clang-format -style=file -assume-filename=${CONFIG_FILE} -fallback-style=none -i
