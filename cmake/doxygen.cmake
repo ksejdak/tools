@@ -18,9 +18,6 @@ function(doxygen_addTarget INPUT)
     set(DOXYGEN_EXCLUDE bin/ build/ deps/ doc/ lib/ test/ tools/)
     set(DOXYGEN_WARN_LOGFILE ${DOXYGEN_OUTPUT_DIRECTORY}/doxygen.warn)
 
-    # This is a temporary workaround until CMake is fixed.
-    set(DOXYGEN_LATEX_MAKEINDEX_CMD makeindex)
-
     # Add target to generate doxygen docs in the build directory.
     doxygen_add_docs(doxygen ${INPUT} WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 
