@@ -8,7 +8,7 @@ HeaderFilterRegex: ''
 AnalyzeTemporaryDtors: false
 FormatStyle:     none
 User:            kuba
-CheckOptions:    
+CheckOptions:
   - key:             abseil-string-find-startswith.AbseilStringsMatchHeader
     value:           absl/strings/match.h
   - key:             abseil-string-find-startswith.IncludeStyle
@@ -108,7 +108,7 @@ CheckOptions:
   - key:             google-readability-function-size.ParameterThreshold
     value:           '4294967295'
   - key:             google-readability-function-size.StatementThreshold
-    value:           '800'
+    value:           '850'
   - key:             google-readability-function-size.VariableThreshold
     value:           '4294967295'
   - key:             google-readability-namespace-comments.ShortNamespaceLines
@@ -134,7 +134,7 @@ CheckOptions:
   - key:             hicpp-function-size.ParameterThreshold
     value:           '4294967295'
   - key:             hicpp-function-size.StatementThreshold
-    value:           '800'
+    value:           '850'
   - key:             hicpp-function-size.VariableThreshold
     value:           '4294967295'
   - key:             hicpp-member-init.IgnoreArrays
@@ -284,7 +284,7 @@ CheckOptions:
   - key:             readability-function-size.ParameterThreshold
     value:           '4294967295'
   - key:             readability-function-size.StatementThreshold
-    value:           '800'
+    value:           '850'
   - key:             readability-function-size.VariableThreshold
     value:           '4294967295'
   - key:             readability-identifier-naming.IgnoreFailedSplit
