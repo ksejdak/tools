@@ -7,4 +7,4 @@ if [ ! -f "compile_commands.json" ]; then
     exit 1
 fi
 
-python ../tools/code/run-clang-tidy.py -quiet
+python ../tools/code/run-clang-tidy.py -quiet -header-filter=src/*
