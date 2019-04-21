@@ -13,7 +13,7 @@ fi
 CONFIG_FILE=".clang_format"
 if [ ! -f ${CONFIG_FILE} ]; then
     echo "No ${CONFIG_FILE} found. Using default one."
-    CONFIG_FILE="tools/code/clang_format"
+    CONFIG_FILE="tools/template/clang-format"
 fi
 
 find ${SRC_PATH} -iname '*.h' -o -iname '*.hpp' -o -iname '*.cpp' -o -iname '*.c' | xargs clang-format -style=file -assume-filename=${CONFIG_FILE} -fallback-style=none -i
