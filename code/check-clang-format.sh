@@ -10,7 +10,7 @@ if [ -z ${SRC_PATH} ]; then
     exit 1
 fi
 
-CONFIG_FILE=".clang_format"
+CONFIG_FILE=".clang-format"
 if [ ! -f ${CONFIG_FILE} ]; then
     echo "No ${CONFIG_FILE} found. Using default one."
     CONFIG_FILE="tools/template/clang-format"
