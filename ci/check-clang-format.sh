@@ -12,9 +12,9 @@ if [ ${?} -ne 0 ]; then
     exit 2
 fi
 
+git update-index -q --refresh
 git diff-index --quiet HEAD
-DIFF_RESULT=${?}
-if [ ${DIFF_RESULT} -ne 0 ]; then
+if [ ${?} -ne 0 ]; then
     echo "The following bad source code format was detected:"
     git --no-pager diff
     exit 3
