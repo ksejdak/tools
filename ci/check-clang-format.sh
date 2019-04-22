@@ -13,8 +13,9 @@ if [ ${?} -ne 0 ]; then
 fi
 
 git diff-index --quiet HEAD
-if [ ${?} -ne 0 ]; then
-    echo "Bad source code format detected for the following files:"
+DIFF_RESULT=${?}
+if [ ${DIFF_RESULT} -ne 0 ]; then
+    echo "The following bad source code format was detected:"
     git --no-pager diff
     exit 3
 fi
