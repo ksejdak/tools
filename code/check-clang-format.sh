@@ -17,3 +17,5 @@ fi
 for SRC_PATH in "$@"; do
     find ${SRC_PATH} -iname '*.h' -o -iname '*.hpp' -o -iname '*.cpp' -o -iname '*.c' | xargs clang-format -style=file -assume-filename=${CONFIG_FILE} -fallback-style=none -i
 done
+
+exit 0
