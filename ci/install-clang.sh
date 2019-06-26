@@ -26,7 +26,7 @@ fi
 
 echo "Installing clang v${VERSION}."
 
-MAJOR_VERSION=`echo ${VERSION} | cut -d . -f 1`
+MAJOR_VERSION=$(echo ${VERSION} | cut -d . -f 1)
 
 if [ "${OS}" == "linux" ]; then
     PACKAGE_NAME="clang+llvm-${VERSION}-x86_64-linux-gnu-ubuntu-14.04"
@@ -56,7 +56,7 @@ fi
 if [ ${MAJOR_VERSION} \> 6 ]; then
     BIN_VERSION=${MAJOR_VERSION}
 else
-    BIN_VERSION=`echo ${VERSION} | cut -d . -f 1-2`
+    BIN_VERSION=$(echo ${VERSION} | cut -d . -f 1-2)
 fi
 
 if [ "${EXPORT}" == "true" ]; then

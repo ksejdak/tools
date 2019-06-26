@@ -22,11 +22,11 @@ if [ -z ${REFERENCE_PATH} ]; then
     exit 3
 fi
 
-OUTPUT=`tools/code/check-cppcheck.sh ${INCLUDE_PATH} ${SRC_PATH}`
+OUTPUT=$(tools/code/check-cppcheck.sh ${INCLUDE_PATH} ${SRC_PATH})
 
 if [ -f ${REFERENCE_PATH} ]; then
     while IFS= read -r LINE; do
-        RESULT=`grep -F "${LINE}" "${REFERENCE_PATH}"`
+        RESULT=$(grep -F "${LINE}" "${REFERENCE_PATH}")
         if [ -z "${RESULT}" ]; then
             echo "cppcheck error: '${OUTPUT}'"
             exit 4

@@ -56,6 +56,7 @@ case "${VERSION}" in
     *)
         echo "Unsupported arm-none-eabi-gcc version."
         exit 3
+        ;;
 
 esac
 

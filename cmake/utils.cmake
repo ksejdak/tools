@@ -10,7 +10,7 @@ macro(utils_getVersion VERSION)
     find_package(Git)
     if (NOT GIT_FOUND)
         utils_error("Git not found")
-    endif()
+    endif ()
 
     execute_process(
         COMMAND ${GIT_EXECUTABLE} describe --abbrev=0 --tags
@@ -21,9 +21,9 @@ macro(utils_getVersion VERSION)
     string(STRIP ${TAG_VERSION} TAG_VERSION)
     string(SUBSTRING ${TAG_VERSION} 1 -1 TAG_VERSION)
 
-    if(TAG_VERSION MATCHES "No names found")
+    if (TAG_VERSION MATCHES "No names found")
         set(TAG_VERSION "0.1.0")
-    endif()
+    endif ()
 
     set(VERSION ${TAG_VERSION})
 endmacro()

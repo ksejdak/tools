@@ -27,7 +27,7 @@ fi
 
 echo "Installing CMake v${VERSION}."
 
-SHORT_VERSION=`echo ${VERSION} | cut -d . -f 1-2`
+SHORT_VERSION=$(echo ${VERSION} | cut -d . -f 1-2)
 PACKAGE_NAME="cmake-${VERSION}-${OS}-x86_64"
 PACKAGE_BIN_NAME="${PACKAGE_NAME}.tar.gz"
 PACKAGE_URL="https://cmake.org/files/v${SHORT_VERSION}/${PACKAGE_BIN_NAME}"

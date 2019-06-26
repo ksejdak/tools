@@ -18,7 +18,7 @@ fi
 if [ -f ${GENERATED_PATH} ]; then
     while IFS='' read -r LINE || [[ -n "$LINE" ]]; do
         WARN=${LINE#"${PWD}/"}
-        RESULT=`grep "${WARN}" "${REFERENCE_PATH}"`
+        RESULT=$(grep "${WARN}" "${REFERENCE_PATH}")
         if [ -z "${RESULT}" ]; then
             echo "Doxygen warning: '${LINE}'"
             exit 3

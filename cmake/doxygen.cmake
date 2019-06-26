@@ -4,7 +4,7 @@ function(doxygen_addTarget INPUT)
     find_package(Doxygen)
     if (NOT DOXYGEN_FOUND)
         utils_error("Doxygen not found")
-    endif()
+    endif ()
 
     set(DOXYGEN_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/build/docs)
     set(DOXYGEN_GENERATE_LATEX NO)
