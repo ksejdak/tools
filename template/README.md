@@ -9,7 +9,7 @@ Project description
 
 ## Subsection
 
-Subsection text.111
+Subsection text.
 
 ## Subsection 2
 
