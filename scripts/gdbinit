@@ -1,0 +1,11 @@
+set output-radix 16
+skip -rfu "std::.*"
+skip -rfu "boost::.*"
+skip -gfile catch.hpp
+
+define target hookpost-remote
+    monitor reset halt
+    load
+    break main
+end
+
