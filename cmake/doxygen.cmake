@@ -6,7 +6,7 @@ function(doxygen_addTarget INPUT)
         utils_error("Doxygen not found")
     endif ()
 
-    set(DOXYGEN_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/build/docs)
+    set(DOXYGEN_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/${CMAKE_BINARY_DIR}/docs)
     set(DOXYGEN_GENERATE_LATEX NO)
     set(DOXYGEN_EXTRACT_PRIVATE YES)
     set(DOXYGEN_EXTRACT_PACKAGE YES)
@@ -24,7 +24,7 @@ function(doxygen_addTarget INPUT)
     # Add target to copy generated doxygen docs to the docs directory.
     add_custom_target(docs
         COMMAND rm -rf ${PROJECT_SOURCE_DIR}/docs/*
-        COMMAND cp -R ${PROJECT_SOURCE_DIR}/build/docs/* ${PROJECT_SOURCE_DIR}/docs/
+        COMMAND cp -R ${PROJECT_SOURCE_DIR}/${CMAKE_BINARY_DIR}/docs/* ${PROJECT_SOURCE_DIR}/docs/
         COMMAND rm ${PROJECT_SOURCE_DIR}/docs/doxygen.warn
     )
 endfunction()
